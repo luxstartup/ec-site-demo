@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>至福のヴィーガンラーメンセット | Premium Vegan Ramen Experience</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B3D;
+            --charcoal: #1A1A1A;
+            --charcoal-light: #2D2D2D;
+            --cream: #FAF8F5;
+            --warm-white: #FFFEF9;
+            --text-primary: #1A1A1A;
+            --text-secondary: #5A5A5A;
+            --text-muted: #8A8A8A;
+            --border-subtle: rgba(201, 169, 98, 0.2);
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 169, 98, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1400px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(201, 169, 98, 0.2);
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 80px rgba(201, 169, 98, 0.3);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--charcoal);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title-en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            font-size: 1.1rem;
+            color: rgba(250, 248, 245, 0.8);
+            line-height: 2;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-price {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+
+        .price-label {
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .price-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .price-tax {
+            font-size: 1rem;
+            color: rgba(250, 248, 245, 0.6);
+            margin-left: 10px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--charcoal);
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 40px rgba(201, 169, 98, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(201, 169, 98, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 20px;
+        }
+
+        .section-dark {
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+
+        .section-light {
+            background: var(--cream);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .section-dark .section-description {
+            color: rgba(250, 248, 245, 0.7);
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            margin: 30px auto;
+        }
+
+        /* Product Card */
+        .product-grid {
+            display: grid;
+            gap: 60px;
+        }
+
+        .product-card {
+            background: var(--warm-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .product-card-header {
+            padding: 40px 40px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .product-gallery {
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Ramen Section */
+        .ramen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .ramen-card {
+            background: var(--charcoal-light);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 169, 98, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .ramen-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(201, 169, 98, 0.15);
+        }
+
+        .ramen-header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+        }
+
+        .ramen-flavor {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 5px;
+        }
+
+        .ramen-flavor-en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .ramen-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .ramen-gallery img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .ramen-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Tableware Section */
+        .tableware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .tableware-card {
+            background: var(--warm-white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s ease;
+        }
+
+        .tableware-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .tableware-image-container {
+            background: linear-gradient(135deg, #f8f6f3 0%, #ebe7e0 100%);
+            padding: 30px;
+        }
+
+        .tableware-images {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px;
+        }
+
+        .tableware-images img {
+            width: auto;
+            height: 140px;
+            max-width: 180px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background: white;
+            padding: 10px;
+        }
+
+        .tableware-images img:hover {
+            transform: scale(1.1);
+        }
+
+        .tableware-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .tableware-origin {
+            font-size: 0.75rem;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .tableware-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .tableware-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Set Contents */
+        /* Ingredients Section */
+        .ingredients-section {
+            background: linear-gradient(135deg, #f8f6f3 0%, #ebe7e0 100%);
+            padding: 30px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .ingredients-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ingredients-title::before {
+            content: '🌱';
+        }
+
+        .ingredients-content {
+            display: grid;
+            gap: 15px;
+        }
+
+        .ingredients-row {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .ingredients-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            min-width: 80px;
+            padding: 5px 10px;
+            background: rgba(201, 169, 98, 0.15);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .ingredients-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .allergen-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .vegan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .vegan-badge::before {
+            content: '✓';
+        }
+
+        /* Ramen Ingredients */
+        .ramen-ingredients {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .ramen-ingredients .ingredients-label {
+            background: rgba(201, 169, 98, 0.25);
+            color: var(--gold-light);
+        }
+
+        .ramen-ingredients .ingredients-value {
+            color: rgba(250, 248, 245, 0.8);
+        }
+
+        .ramen-ingredients .allergen-badge {
+            background: rgba(254, 243, 199, 0.2);
+            color: #fcd34d;
+        }
+
+        .set-contents {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #252525 100%);
+            border-radius: 30px;
+            padding: 60px;
+            margin-top: 80px;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .set-contents-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            color: var(--cream);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .set-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .set-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .set-item:hover {
+            background: rgba(201, 169, 98, 0.08);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .set-item-number {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            flex-shrink: 0;
+        }
+
+        .set-item-text {
+            color: var(--cream);
+            font-size: 1rem;
+        }
+
+        .set-item-qty {
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: rgba(250, 248, 245, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border: none;
+            border-radius: 50%;
+            color: var(--charcoal);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .product-card-header {
+                padding: 30px 25px 15px;
+            }
+
+            .set-contents {
+                padding: 40px 25px;
+            }
+
+            .ramen-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                order: -1;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">✨ Limited Edition Set</div>
+                <h1 class="hero-title">至福のヴィーガンラーメンセット</h1>
+                <p class="hero-title-en">Premium Vegan Ramen Experience</p>
+                <p class="hero-description">
+                    アルコールフリーのヴィーガンインスタントラーメン３種と、国産大豆ミート、
+                    そして美濃焼の器で楽しむ、こだわりの日本体験をお届けします。
+                </p>
+                <div class="hero-price">
+                    <p class="price-label">SET PRICE</p>
+                    <span class="price-value">¥12,800</span>
+                    <span class="price-tax">(税込)</span>
+                </div>
+                <a href="#" class="cta-button">カートに入れる →</a>
+            </div>
+            <div class="hero-image">
+                <img src="set_hero.png" alt="至福のヴィーガンラーメンセット" onclick="openLightbox(this)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Ingredient Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Main Ingredient</p>
+                <h2 class="section-title">国産大豆ミート・フィレ</h2>
+                <div class="gold-line"></div>
+                <p class="section-description">
+                    国産大豆100%使用。お肉のような食感と旨みで、ラーメンのトッピングに最適です。
+                </p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-card-header">
+                    <p class="product-category">グリーンカルチャー</p>
+                    <h3 class="product-name">【ポスト投函送料無料】国産大豆ミート・フィレ 200g</h3>
+                    <p class="product-description">
+                        国産大豆を100%使用した高品質な大豆ミート。お湯で戻すだけで、お肉のような食感が楽しめます。
+                        ヴィーガンラーメンのトッピングとして、チャーシューの代わりにお使いいただけます。
+                    </p>
+                </div>
+                <div class="product-gallery">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_34_1_000000002800.jpg"
+                                alt="大豆ミート 1">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_33_2_000000002800.jpg"
+                                alt="大豆ミート 2">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_32_3_000000002800.jpg"
+                                alt="大豆ミート 3">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_31_4_000000002800.jpg"
+                                alt="大豆ミート 4">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_30_5_000000002800.jpg"
+                                alt="大豆ミート 5">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_29_6_000000002800.jpg"
+                                alt="大豆ミート 6">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_28_7_000000002800.jpg"
+                                alt="大豆ミート 7">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="【ポスト投函送料無料】国産大豆ミート・フィレ 200g 《国産大豆100％》 大豆肉 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_35_8_000000002800.jpg"
+                                alt="大豆ミート 8">
+                        </div>
+                    </div>
+                </div>
+                <!-- 原材料情報 -->
+                <div class="ingredients-section">
+                    <h4 class="ingredients-title">原材料・アレルギー情報</h4>
+                    <div class="ingredients-content">
+                        <div class="ingredients-row">
+                            <span class="ingredients-label">原材料名</span>
+                            <span class="ingredients-value">脱脂大豆（北海道産、遺伝子組み換えでない）</span>
+                        </div>
+                        <div class="ingredients-row">
+                            <span class="ingredients-label">製法</span>
+                            <span class="ingredients-value">圧搾法（ヘキサンフリー）</span>
+                        </div>
+                        <div class="ingredients-row">
+                            <span class="ingredients-label">アレルギー</span>
+                            <span class="ingredients-value">
+                                <span class="allergen-badge">大豆</span>
+                            </span>
+                        </div>
+                        <div class="vegan-badge">動物性原料不使用・ヴィーガン対応</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ramen Section -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Vegan Instant Ramen</p>
+                <h2 class="section-title">アルコールフリー<br>ヴィーガンインスタントラーメン</h2>
+                <div class="gold-line"></div>
+                <p class="section-description">
+                    クラタ食品が誇る、動物性原料・アルコール不使用のこだわりラーメン。3つの味をお楽しみください。
+                </p>
+            </div>
+
+            <div class="ramen-grid">
+                <!-- Miso -->
+                <div class="ramen-card">
+                    <div class="ramen-header">
+                        <h3 class="ramen-flavor">味噌</h3>
+                        <p class="ramen-flavor-en">Miso</p>
+                    </div>
+                    <div class="ramen-gallery">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 味噌 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_28_1_000000003417.jpg"
+                            alt="味噌ラーメン 1" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 味噌 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_29_2_000000003417.jpg"
+                            alt="味噌ラーメン 2" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 味噌 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_30_3_000000003417.jpg"
+                            alt="味噌ラーメン 3" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 味噌 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_31_4_000000003417.jpg"
+                            alt="味噌ラーメン 4" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 味噌 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_27_5_000000003417.jpg"
+                            alt="味噌ラーメン 5" onclick="openLightbox(this)">
+                    </div>
+                    <!-- 原材料情報 -->
+                    <div class="ramen-ingredients">
+                        <div class="ingredients-content">
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">麺</span>
+                                <span class="ingredients-value">ノンフライ麺［小麦粉（国内製造）、でん粉、小麦たんぱく、食塩、植物油脂／かんすい、抽出V.E］</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">スープ</span>
+                                <span
+                                    class="ingredients-value">食塩、粉末みそ、ぶどう糖、たん白加水分解物、粉末しょうゆ、酵母エキス、すりごま、粉末豆乳、砂糖、でん粉分解物、ガーリックパウダー、オニオン、香味食用油、ジンジャー、唐辛子／カラメル色素</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">アレルギー</span>
+                                <span class="ingredients-value">
+                                    <span class="allergen-badge">小麦</span>
+                                    <span class="allergen-badge">大豆</span>
+                                    <span class="allergen-badge">ごま</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yuzu Shio -->
+                <div class="ramen-card">
+                    <div class="ramen-header">
+                        <h3 class="ramen-flavor">柚子塩</h3>
+                        <p class="ramen-flavor-en">Yuzu Shio</p>
+                    </div>
+                    <div class="ramen-gallery">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 柚子塩 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_28_1_000000003416.jpg"
+                            alt="柚子塩ラーメン 1" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 柚子塩 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_30_2_000000003416.jpg"
+                            alt="柚子塩ラーメン 2" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 柚子塩 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_31_3_000000003416.jpg"
+                            alt="柚子ラーメン 3" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 柚子塩 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_27_4_000000003416.jpg"
+                            alt="柚子塩ラーメン 4" onclick="openLightbox(this)">
+                    </div>
+                    <!-- 原材料情報 -->
+                    <div class="ramen-ingredients">
+                        <div class="ingredients-content">
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">麺</span>
+                                <span class="ingredients-value">ノンフライ麺［小麦粉（国内製造）、でん粉、小麦たんぱく、食塩、植物油脂／かんすい、抽出V.E］</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">スープ</span>
+                                <span
+                                    class="ingredients-value">食塩、酵母エキス、砂糖、植物油脂、すりごま、でん粉分解物、ゆず皮粉末、ガーリックパウダー、ジンジャー、こしょう、白菜エキスパウダー、加工デンプン／カラメル色素</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">アレルギー</span>
+                                <span class="ingredients-value">
+                                    <span class="allergen-badge">小麦</span>
+                                    <span class="allergen-badge">大豆</span>
+                                    <span class="allergen-badge">ごま</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ramen-card">
+                    <div class="ramen-header">
+                        <h3 class="ramen-flavor">醤油</h3>
+                        <p class="ramen-flavor-en">Shoyu</p>
+                    </div>
+                    <div class="ramen-gallery">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 醤油 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_28_1_000000003418.jpg"
+                            alt="醤油ラーメン 1" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 醤油 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_29_2_000000003418.jpg"
+                            alt="醤油ラーメン 2" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 醤油 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_30_3_000000003418.png"
+                            alt="醤油ラーメン 3" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 醤油 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_31_4_000000003418.jpg"
+                            alt="醤油ラーメン 4" onclick="openLightbox(this)">
+                        <img src="【新商品】アルコールフリー ヴィーガンインスタントラーメン 醤油 1食 クラタ食品 _ 【公式】グリーンカルチャー ONLINE STORE/imgi_27_5_000000003418.jpg"
+                            alt="醤油ラーメン 5" onclick="openLightbox(this)">
+                    </div>
+                    <!-- 原材料情報 -->
+                    <div class="ramen-ingredients">
+                        <div class="ingredients-content">
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">麺</span>
+                                <span class="ingredients-value">ノンフライ麺［小麦粉（国内製造）、でん粉、小麦たんぱく、食塩、植物油脂／かんすい、抽出V.E］</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">スープ</span>
+                                <span
+                                    class="ingredients-value">食塩、粉末しょうゆ、砂糖、ぶどう糖、酵母エキス、たん白加水分解物、オニオン、ガーリックパウダー、香味食用油、粉末こんぶ、ブラックペッパー、ジンジャー／カラメル色素</span>
+                            </div>
+                            <div class="ingredients-row">
+                                <span class="ingredients-label">アレルギー</span>
+                                <span class="ingredients-value">
+                                    <span class="allergen-badge">小麦</span>
+                                    <span class="allergen-badge">大豆</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tableware Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Japanese Tableware</p>
+                <h2 class="section-title">美濃焼の器と箸</h2>
+                <div class="gold-line"></div>
+                <p class="section-description">
+                    日本の伝統工芸、美濃焼の器と職人の技が光る食器セット。ラーメンをより美味しく演出します。
+                </p>
+            </div>
+
+            <div class="tableware-grid">
+                <!-- Ramen Bowl -->
+                <div class="tableware-card">
+                    <div class="tableware-image-container">
+                        <div class="tableware-images">
+                            <img src="リネアスリムモダンラーメン丼950cc【どんぶり 日本製 美濃焼 和食器】の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_64_11377993_6.jpg.jpeg"
+                                alt="ラーメン丼 1" onclick="openLightbox(this)">
+                            <img src="リネアスリムモダンラーメン丼950cc【どんぶり 日本製 美濃焼 和食器】の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_65_11377993_7.jpg.jpeg"
+                                alt="ラーメン丼 2" onclick="openLightbox(this)">
+                            <img src="リネアスリムモダンラーメン丼950cc【どんぶり 日本製 美濃焼 和食器】の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_68_11377993_10.jpg.webp"
+                                alt="ラーメン丼 3" onclick="openLightbox(this)">
+                            <img src="リネアスリムモダンラーメン丼950cc【どんぶり 日本製 美濃焼 和食器】の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_69_11377993_11.jpg.webp"
+                                alt="ラーメン丼 4" onclick="openLightbox(this)">
+                            <img src="リネアスリムモダンラーメン丼950cc【どんぶり 日本製 美濃焼 和食器】の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_70_11377993_12.jpg.webp"
+                                alt="ラーメン丼 5" onclick="openLightbox(this)">
+                        </div>
+                    </div>
+                    <div class="tableware-info">
+                        <p class="tableware-origin">美濃焼 ・ 日本製</p>
+                        <h3 class="tableware-name">リネアスリムモダンラーメン丼 950cc</h3>
+                        <p class="tableware-desc">スタイリッシュなデザインの美濃焼ラーメン丼。たっぷり950ccの容量。</p>
+                    </div>
+                </div>
+
+                <!-- Chopsticks -->
+                <div class="tableware-card">
+                    <div class="tableware-image-container">
+                        <div class="tableware-images">
+                            <img src="PBT亀甲箸 黒 24cm 10膳入の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_50_12011973_1000.jpg.jpeg"
+                                alt="亀甲箸" onclick="openLightbox(this)">
+                        </div>
+                    </div>
+                    <div class="tableware-info">
+                        <p class="tableware-origin">PBT樹脂 ・ 日本製</p>
+                        <h3 class="tableware-name">PBT亀甲箸 黒 24cm</h3>
+                        <p class="tableware-desc">伝統的な亀甲模様の高級感ある箸。滑り止め加工で麺もつかみやすい。</p>
+                    </div>
+                </div>
+
+                <!-- Chopstick Rest -->
+                <div class="tableware-card">
+                    <div class="tableware-image-container">
+                        <div class="tableware-images">
+                            <img src="小判 箸置【6種】【キッチン】美濃焼＜日本製＞の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_59_6444795_1003.jpg.webp"
+                                alt="箸置 1" onclick="openLightbox(this)">
+                            <img src="小判 箸置【6種】【キッチン】美濃焼＜日本製＞の商品ページ｜卸・仕入れサイト【スーパーデリバリー】/imgi_61_6444795_1006.jpg.webp"
+                                alt="箸置 2" onclick="openLightbox(this)">
+                        </div>
+                    </div>
+                    <div class="tableware-info">
+                        <p class="tableware-origin">美濃焼 ・ 日本製</p>
+                        <h3 class="tableware-name">小判 箸置【6種】</h3>
+                        <p class="tableware-desc">シンプルで上品な小判型の箸置き。食卓に彩りを添えます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Contents -->
+            <div class="set-contents">
+                <h3 class="set-contents-title">セット内容</h3>
+                <div class="set-list">
+                    <div class="set-item">
+                        <div class="set-item-number">1</div>
+                        <div>
+                            <div class="set-item-text">国産大豆ミート・フィレ 200g</div>
+                            <div class="set-item-qty">× 1パック</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">2</div>
+                        <div>
+                            <div class="set-item-text">ヴィーガンラーメン 味噌</div>
+                            <div class="set-item-qty">× 1食</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">3</div>
+                        <div>
+                            <div class="set-item-text">ヴィーガンラーメン 柚子塩</div>
+                            <div class="set-item-qty">× 1食</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">4</div>
+                        <div>
+                            <div class="set-item-text">ヴィーガンラーメン 醤油</div>
+                            <div class="set-item-qty">× 1食</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">5</div>
+                        <div>
+                            <div class="set-item-text">美濃焼ラーメン丼 950cc</div>
+                            <div class="set-item-qty">× 1個</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">6</div>
+                        <div>
+                            <div class="set-item-text">PBT亀甲箸 黒 24cm</div>
+                            <div class="set-item-qty">× 1膳</div>
+                        </div>
+                    </div>
+                    <div class="set-item">
+                        <div class="set-item-number">7</div>
+                        <div>
+                            <div class="set-item-text">美濃焼 小判箸置</div>
+                            <div class="set-item-qty">× 1個</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-brand">PREMIUM VEGAN RAMEN SET</p>
+        <p class="footer-text">© 2026 Okaeri Luxembourg. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">✕</button>
+        <img id="lightbox-img" src="" alt="拡大画像">
+    </div>
+
+    <script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = element.querySelector('img')?.src || element.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Okaeri Luxembourg – Choose Your 3 Journeys</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f7f3ef, #fdfdfd);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 3px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .card.selected {
+            border-color: #e63946;
+            background: #fff5f5;
+        }
+
+        .category {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #e63946;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        button {
+            background: #e63946;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        button.active {
+            opacity: 1;
+        }
+
+        button.active:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🇯🇵 Okaeri Luxembourg</h1>
+        <p>2ヶ月に一度、日本から届く家族の物語</p>
+        <div class="counter">選択中：<span id="count">0</span> / 3</div>
+    </header>
+
+    <div class="container">
+        <div class="card" onclick="toggleSelect(this)">
+            <div class="category">知育・遊び</div>
+            <h3>Smart Kids Box</h3>
+            <p>日本の知育菓子と高品質文具で、遊びながら学ぶ体験。</p>
+        </div>
+
+        <div class="card" onclick="toggleSelect(this)">
+            <div class="category">晩酌・美食</div>
+            <h3>Craft Night Box</h3>
+            <p>職人仕込みのおつまみと、有田焼・燕三条の器。</p>
+        </div>
+
+        <div class="card" onclick="toggleSelect(this)">
+            <div class="category">癒やし・茶道</div>
+            <h3>Zen Tea Journey</h3>
+            <p>プレミアム茶葉と和菓子で、家族の静かな時間を。</p>
+        </div>
+
+        <div class="card" onclick="toggleSelect(this)">
+            <div class="category">創造・工芸</div>
+            <h3>Creative Japan</h3>
+            <p>日本の文房具と伝統工芸DIYキット。</p>
+        </div>
+
+        <div class="card" onclick="toggleSelect(this)">
+            <div class="category">J-Sweets</div>
+            <h3>Sweet Memories</h3>
+            <p>日本限定のお菓子と、ここでしか手に入らないグッズ。</p>
+        </div>
+    </div>
+
+    <footer>
+        <button id="confirmBtn">この3つで物語を始める</button>
+    </footer>
+
+    <script>
+        let selected = 0;
+        const maxSelect = 3;
+        const countEl = document.getElementById("count");
+        const button = document.getElementById("confirmBtn");
+
+        function toggleSelect(card) {
+            if (card.classList.contains("selected")) {
+                card.classList.remove("selected");
+                selected--;
+            } else {
+                if (selected >= maxSelect) return;
+                card.classList.add("selected");
+                selected++;
+            }
+
+            countEl.textContent = selected;
+
+            if (selected === maxSelect) {
+                button.classList.add("active");
+            } else {
+                button.classList.remove("active");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

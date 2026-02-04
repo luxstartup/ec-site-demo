@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okaeri Luxembourg - Build Your Exciting Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Noto+Sans+JP:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+            background-color: #fffafb;
+        }
+
+        .japan-red {
+            color: #bc002d;
+        }
+
+        .bg-japan-red {
+            background-color: #bc002d;
+        }
+
+        /* Tabs */
+        .category-tab {
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .category-tab:hover {
+            opacity: 1;
+        }
+
+        .category-tab.active {
+            border-bottom: 4px solid #bc002d;
+            color: #bc002d;
+            font-weight: 800;
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Slots */
+        .slot {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Bouncy transition */
+        .slot-filled {
+            border-color: #bc002d;
+            background-color: #fff;
+            box-shadow: 0 10px 15px -3px rgba(188, 0, 45, 0.1), 0 4px 6px -2px rgba(188, 0, 45, 0.05);
+        }
+
+        /* Product Cards */
+        .product-card {
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .product-card img {
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Animations Keyframes */
+        @keyframes pop-in {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-pop-in {
+            animation: pop-in 0.5s ease-out forwards;
+        }
+
+        @keyframes pulse-red {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(188, 0, 45, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 15px rgba(188, 0, 45, 0);
+            }
+        }
+
+        .pulse-active {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes slot-fill-success {
+            0% {
+                transform: scale(1);
+                border-color: #e5e7eb;
+            }
+
+            50% {
+                transform: scale(1.05);
+                border-color: #bc002d;
+                background-color: #fff0f0;
+            }
+
+            100% {
+                transform: scale(1);
+                border-color: #bc002d;
+            }
+        }
+
+        .animate-slot-fill {
+            animation: slot-fill-success 0.6s ease-out;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8 min-h-screen">
+
+    <header class="text-center mb-12 pt-8 relative">
+        <div
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-red-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10">
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">
+            Begin Your <span class="japan-red relative inline-block">Japan Journey<span
+                    class="absolute bottom-2 left-0 w-full h-2 bg-red-200 opacity-30 -z-10"></span></span>
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Curate your family's 6-month adventure. Select 3 exciting boxes to be delivered every two months.
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <div
+            class="lg:col-span-4 lg:sticky lg:top-8 space-y-6 bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-red-100 shadow-xl">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span
+                    class="bg-japan-red w-8 h-8 rounded-full text-white flex items-center justify-center mr-3 text-sm">3</span>
+                Your 6-Month Plan
+            </h2>
+
+            <div id="slot-1"
+                class="slot group relative overflow-hidden p-1 rounded-2xl border-4 border-dashed border-gray-200 bg-gray-50 h-40 flex flex-col justify-center items-center text-center transition-all">
+                <div
+                    class="absolute top-3 left-4 text-xs font-bold text-gray-400 uppercase tracking-widest bg-white px-2 py-1 rounded-full shadow-sm z-10">
+                    Delivery 1 (Month 1-2)</div>
+                <div class="slot-content w-full h-full flex flex-col items-center justify-center p-4 rounded-xl">
+                    <span class="text-4xl mb-2 opacity-30 group-hover:scale-110 transition-transform">📦</span>
+                    <p class="text-gray-400 font-medium italic">Drop an exciting box here!</p>
+                </div>
+            </div>
+
+            <div id="slot-2"
+                class="slot group relative overflow-hidden p-1 rounded-2xl border-4 border-dashed border-gray-200 bg-gray-50 h-40 flex flex-col justify-center items-center text-center transition-all">
+                <div
+                    class="absolute top-3 left-4 text-xs font-bold text-gray-400 uppercase tracking-widest bg-white px-2 py-1 rounded-full shadow-sm z-10">
+                    Delivery 2 (Month 3-4)</div>
+                <div class="slot-content w-full h-full flex flex-col items-center justify-center p-4 rounded-xl">
+                    <span class="text-4xl mb-2 opacity-30 group-hover:scale-110 transition-transform">📦</span>
+                    <p class="text-gray-400 font-medium italic">Waiting for your selection...</p>
+                </div>
+            </div>
+
+            <div id="slot-3"
+                class="slot group relative overflow-hidden p-1 rounded-2xl border-4 border-dashed border-gray-200 bg-gray-50 h-40 flex flex-col justify-center items-center text-center transition-all">
+                <div
+                    class="absolute top-3 left-4 text-xs font-bold text-gray-400 uppercase tracking-widest bg-white px-2 py-1 rounded-full shadow-sm z-10">
+                    Delivery 3 (Month 5-6)</div>
+                <div class="slot-content w-full h-full flex flex-col items-center justify-center p-4 rounded-xl">
+                    <span class="text-4xl mb-2 opacity-30 group-hover:scale-110 transition-transform">📦</span>
+                    <p class="text-gray-400 font-medium italic">The final surprise!</p>
+                </div>
+            </div>
+
+            <button id="checkout-btn"
+                class="w-full bg-gray-800 text-white py-5 rounded-2xl font-extrabold text-xl opacity-40 cursor-not-allowed transform transition-all duration-300 hover:scale-[1.02] shadow-lg">
+                Complete Journey (€195)
+            </button>
+        </div>
+
+        <div class="lg:col-span-8">
+            <div class="flex overflow-x-auto space-x-4 border-b-2 border-gray-100 mb-8 pb-1 no-scrollbar px-2">
+                <button onclick="showCategory('kids')" id="tab-kids"
+                    class="category-tab active whitespace-nowrap px-4 py-3 text-lg">🧒 Kids Samurai</button>
+                <button onclick="showCategory('adults')" id="tab-adults"
+                    class="category-tab whitespace-nowrap px-4 py-3 text-lg">🍶 Izakaya Night</button>
+                <button onclick="showCategory('zen')" id="tab-zen"
+                    class="category-tab whitespace-nowrap px-4 py-3 text-lg">🍵 Family Zen</button>
+                <button onclick="showCategory('creative')" id="tab-creative"
+                    class="category-tab whitespace-nowrap px-4 py-3 text-lg">🎨 Creative Atelier</button>
+                <button onclick="showCategory('sweets')" id="tab-sweets"
+                    class="category-tab whitespace-nowrap px-4 py-3 text-lg">🍬 J-Sweets Explorer</button>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock Data with Placeholder Images (Represents generated photos)
+        // In a real app, replace URLs with actual product photography.
+        const categories = {
+            kids: [
+                { id: 1, tag: "Bestseller", name: "Sushi Master Set", desc: "DIY Candy Kit + Premium Bento Box", img: "https://placehold.co/600x400/ffadad/ffffff?text=Sushi+Candy+Set" },
+                { id: 2, tag: "Active", name: "Ninja Training", desc: "Shuriken Snacks + Pro Kendama", img: "https://placehold.co/600x400/a0c4ff/ffffff?text=Ninja+Toys" },
+                { id: 3, tag: "New", name: "Pokemon Discovery", desc: "Pokemon Snacks + Lunch Bag", img: "https://placehold.co/600x400/fdffb6/333333?text=Pokemon+Goods" }
+            ],
+            adults: [
+                { id: 11, tag: "Premium", name: "Golden Izakaya", desc: "Smoked Nuts + Mt.Fuji Sake Cup", img: "https://placehold.co/600x400/bdb2ff/ffffff?text=Sake+Set" },
+                { id: 12, tag: "Spicy", name: "Zest of Japan", desc: "Lemon Ika-ten + Tsubame Tumbler", img: "https://placehold.co/600x400/ffc6ff/ffffff?text=Lemon+Sour+Set" }
+            ],
+            zen: [
+                { id: 21, tag: "Relax", name: "Matcha Ritual", desc: "Organic Matcha + Modern Tea Bowl", img: "https://placehold.co/600x400/caffbf/333333?text=Matcha+Bowl" },
+                { id: 22, tag: "Beautiful", name: "Amber Jewels", desc: "Kohakuto Candy + Glass Plate", img: "https://placehold.co/600x400/ffd6a5/ffffff?text=Kohakuto+Jewels" }
+            ],
+            creative: [
+                { id: 31, tag: "DIY", name: "Calligraphy Artist", desc: "Sesame Cookies + Water Script Set", img: "https://placehold.co/600x400/e5e5e5/333333?text=Calligraphy" }
+            ],
+            sweets: [
+                { id: 41, tag: "Fun", name: "Hi-Chew King", desc: "10 Seasonal Flavors + Silicon Pouch", img: "https://placehold.co/600x400/ff99c8/ffffff?text=Hi-Chew+Variety" },
+                { id: 42, tag: "Popular", name: "Pocky Tour", desc: "Luxury Pocky + Stainless Tray", img: "https://placehold.co/600x400/9bf6ff/333333?text=Pocky+Party" }
+            ]
+        };
+
+        let selected = [null, null, null];
+
+        function showCategory(catKey) {
+            // Update Tabs
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + catKey).classList.add('active');
+
+            // Update Grid with Animation delay
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const items = categories[catKey];
+            items.forEach((item, index) => {
+                // Staggered animation delay
+                const delay = index * 100;
+                const card = `
+                    <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 animate-pop-in relative flex flex-col" style="animation-delay: ${delay}ms; opacity: 0;">
+                        <div class="absolute top-4 right-4bg-white/80 backdrop-blur text-xs font-bold px-3 py-1 rounded-full z-10 shadow-sm">
+                            <span class="japan-red">${item.tag}</span>
+                        </div>
+                        <div class="h-48 overflow-hidden relative">
+                             <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between relative">
+                            <div>
+                                <h3 class="font-extrabold text-xl mb-1 leading-tight">${item.name}</h3>
+                                <p class="text-gray-500 text-sm mb-4">${item.desc}</p>
+                            </div>
+                            <button onclick="addToPlan('${item.name}', '${item.img}')" 
+                                class="w-full py-3 rounded-xl font-bold text-white bg-black hover:bg-japan-red transition-colors duration-300 shadow-md flex items-center justify-center group">
+                                <span>Add to Plan</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function addToPlan(name, img) {
+            const nextSlotIndex = selected.indexOf(null);
+            if (nextSlotIndex === -1) {
+                // Shake animation for full slots could go here
+                alert("Whoops! Your journey is full. Remove a box to add a new one.");
+                return;
+            }
+
+            selected[nextSlotIndex] = { name, img };
+
+            // Trigger slot animation
+            const slotDiv = document.getElementById('slot-' + (nextSlotIndex + 1));
+            slotDiv.classList.remove('animate-slot-fill'); // Reset animation
+            void slotDiv.offsetWidth; // Trigger reflow
+            slotDiv.classList.add('animate-slot-fill');
+
+            updateSlots();
+        }
+
+        function updateSlots() {
+            selected.forEach((item, index) => {
+                const slotDiv = document.getElementById('slot-' + (index + 1));
+                const contentDiv = slotDiv.querySelector('.slot-content');
+
+                if (item) {
+                    slotDiv.classList.remove('border-dashed', 'border-gray-200', 'bg-gray-50');
+                    slotDiv.classList.add('slot-filled', 'border-solid');
+
+                    contentDiv.innerHTML = `
+                        <div class="flex items-center w-full h-full animate-pop-in">
+                            <img src="${item.img}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg shadow-sm border-2 border-white mr-4">
+                            <div class="text-left flex-grow">
+                                <h4 class="font-bold text-lg leading-tight">${item.name}</h4>
+                                <button onclick="removeSlot(${index})" class="text-xs text-red-500 hover:text-red-700 font-bold underline mt-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    slotDiv.classList.add('border-dashed', 'border-gray-200', 'bg-gray-50');
+                    slotDiv.classList.remove('slot-filled', 'border-solid');
+                    contentDiv.innerHTML = `
+                        <span class="text-4xl mb-2 opacity-30 group-hover:scale-110 transition-transform">📦</span>
+                        <p class="text-gray-400 font-medium italic">${index === 0 ? 'Drop an exciting box here!' : 'Waiting for selection...'}</p>
+                    `;
+                }
+            });
+
+            // Update Checkout Button State
+            const btn = document.getElementById('checkout-btn');
+            if (selected.every(i => i !== null)) {
+                btn.classList.remove('

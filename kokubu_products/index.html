@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国分ネットン - チョコレート商品一覧</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B4513;
+            --primary-light: #D2691E;
+            --accent: #FFD700;
+            --bg-cream: #FFF8F0;
+            --bg-chocolate: #3D2314;
+            --text-dark: #2D1B0E;
+            --text-light: #6B4423;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, #FFF0E5 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-chocolate) 0%, #5D3A1A 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,215,0,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,215,0,0.08)"/><circle cx="40" cy="80" r="2" fill="rgba(255,215,0,0.1)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .header .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(139, 69, 19, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #FFF5EB 0%, #FFE8D6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-materials {
+            background: rgba(139, 69, 19, 0.08);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .product-materials-label {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .product-materials-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .product-price .tax {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .footer {
+            background: var(--bg-chocolate);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .source-info {
+            background: rgba(139, 69, 19, 0.05);
+            border: 1px solid rgba(139, 69, 19, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .source-info-icon {
+            font-size: 2rem;
+        }
+
+        .source-info-text {
+            flex: 1;
+        }
+
+        .source-info-text strong {
+            display: block;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .source-info-text span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .source-info-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .source-info-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <span class="emoji">🍫</span>
+        <h1>国分ネットン チョコレート商品一覧</h1>
+        <p>Kokubu Netton - Chocolate Products Catalog</p>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-value">10</div>
+            <div class="stat-label">商品数</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">¥1,296〜</div>
+            <div class="stat-label">価格帯</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">卸売</div>
+            <div class="stat-label">販売形態</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="source-info">
+            <div class="source-info-icon">📦</div>
+            <div class="source-info-text">
+                <strong>データソース</strong>
+                <span>このデータは <a href="https://netton.kokubu.jp/shop/c/c10/" target="_blank">国分ネットン</a>
+                    から取得されました（2026年2月3日）</span>
+            </div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">人気</div>
+                    <img src="images/45175305.jpg" alt="M&M'S ミニ ミルクチョコレート" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Ｍ＆Ｍ'Ｓ ミニ ミルクチョコレート 13.5gx24</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">
+                            ミルクチョコレートをカラフルにシュガーコーティングした粒チョコレートの代名詞のエムアンドエムズをチョイ食べに便利なテトラタイプの個包装にしました。</div>
+                    </div>
+                    <div class="product-price">¥1,296 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">フェアトレード</div>
+                    <img src="images/4901592924995.jpg" alt="Tony's ミルクチョコレート" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Ｔｏｎｙ'ｓ ミルクチョコレート 180gx3</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">カカオ産業における違法な児童労働や強制労働の１００％撤廃を目指した、オランダ発のフェアトレードチョコレートです。
+                        </div>
+                    </div>
+                    <div class="product-price">¥2,310 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">フェアトレード</div>
+                    <img src="images/4901592925008.jpg" alt="Tony's ミルクチョコレート キャラメルシーソルト" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Ｔｏｎｙ'ｓ ミルクチョコレート キャラメルシーソルト 180gx3</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">ミルクチョコレートにキャラメルとシーソルトフレイクを加え、甘塩っぱいチョコレートに仕上げました。</div>
+                    </div>
+                    <div class="product-price">¥2,310 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">グリコ</div>
+                    <img src="images/4901005500846.jpg" alt="神戸ローストショコラ クリーミーミルク" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">グリコ 神戸ローストショコラ クリーミーミルク 53gx10</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">バンホーテンのココアパウダーを練り込んだ、粒型ソリッドチョコレート。</div>
+                    </div>
+                    <div class="product-price">¥1,900 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">明治</div>
+                    <img src="images/4902777080093.jpg" alt="アポロ マイスタイル" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">明治 アポロ マイスタイル 41gx8</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">甘さ控えめなミルクチョコレートと、濃厚な苺クリームを組み合わせた大人向けのアポロ。</div>
+                    </div>
+                    <div class="product-price">¥1,832 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">ロッテ</div>
+                    <img src="images/4903333230617.jpg" alt="ラミー" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">●★ロッテ ラミー 3本x10</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">特製ラムレーズンと生チョコのおいしさ。</div>
+                    </div>
+                    <div class="product-price">¥2,320 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">大袋</div>
+                    <img src="images/4902777010113.jpg" alt="チョコレート効果カカオ72%" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">☆明治 チョコレート効果カカオ７２％ 大袋 225g x12</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">カカオ分７２％の本格ビターチョコレート。</div>
+                    </div>
+                    <div class="product-price">¥13,644 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">大袋</div>
+                    <img src="images/4902777026480.jpg" alt="チョコレート効果カカオ86%" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">☆明治 チョコレート効果カカオ８６％ 大袋 210g x12</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">カカオ分８６％の本格ビターチョコレート。</div>
+                    </div>
+                    <div class="product-price">¥13,644 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">プレミアム</div>
+                    <img src="images/4903333277018.jpg" alt="プレミアムガーナ ダークミルク" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">★ロッテ プレミアムガーナ ダークミルク 70g x10</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">カカオもミルクも楽しめる、贅沢な一枚です。</div>
+                    </div>
+                    <div class="product-price">¥2,590 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">オーガニック</div>
+                    <img src="images/4580523152913.jpg" alt="有機スティックチョコ アーモンドミルク" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">GOOD NATURE MARKET 有機スティックチョコ アーモンドミルク 7本x15</h3>
+                    <div class="product-materials">
+                        <div class="product-materials-label">商品説明</div>
+                        <div class="product-materials-text">乳製品の代わりにアーモンドミルクを使用したオーガニックチョコレート。</div>
+                    </div>
+                    <div class="product-price">¥4,830 <span class="tax">(税込)</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Kokubu Netton Product Catalog - Data scraped for demonstration purposes</p>
+        <p style="margin-top: 10px;">Source: <a href="https://netton.kokubu.jp/shop/c/c10/"
+                style="color: #FFD700;">netton.kokubu.jp</a></p>
+    </footer>
+</body>
+
+</html>

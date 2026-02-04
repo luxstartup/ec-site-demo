@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okaeri Luxembourg - Curate Your Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --slate: #2a2a2a;
+            --ember: #ff6b35;
+            --gold: #ffd700;
+            --pearl: #f8f8f8;
+            --mist: rgba(248, 248, 248, 0.05);
+            --sakura: #ff9ecd;
+            --azure: #4a9eff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(165deg, var(--noir) 0%, var(--charcoal) 50%, #1a1520 100%);
+            color: var(--pearl);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -50px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand-mark {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--sakura) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 0 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .brand-text h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-text p {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(248, 248, 248, 0.6);
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--mist);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .progress-dot.active {
+            width: 40px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, var(--ember) 0%, var(--sakura) 100%);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 70px;
+            animation: fadeIn 1s ease-out 0.2s backwards;
+        }
+
+        .hero-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--gold) 50%, var(--ember) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-size: 1.3rem;
+            color: rgba(248, 248, 248, 0.7);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 40px 20px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .experience-card {
+            flex: 0 0 420px;
+            background: linear-gradient(145deg, rgba(42, 42, 42, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            border-radius: 30px;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            animation: cardSlideIn 0.8s ease-out backwards;
+        }
+
+        .experience-card:nth-child(1) { animation-delay: 0.1s; }
+        .experience-card:nth-child(2) { animation-delay: 0.2s; }
+        .experience-card:nth-child(3) { animation-delay: 0.3s; }
+        .experience-card:nth-child(4) { animation-delay: 0.4s; }
+        .experience-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--ember), var(--sakura), var(--azure));
+            border-radius: 30px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: -1;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .experience-card.selected {
+            border-color: var(--ember);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4), inset 0 0 0 1px rgba(255, 107, 53, 0.2);
+        }
+
+        .experience-card.selected::before {
+            opacity: 0.2;
+        }
+
+        .card-header {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 158, 205, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .experience-card:hover .card-header::before {
+            opacity: 1;
+        }
+
+        .card-emoji {
+            font-size: 6rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transition: transform 0.5s ease;
+        }
+
+        .experience-card:hover .card-emoji {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .card-body {
+            padding: 35px;
+        }
+
+        .card-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--pearl);
+        }
+
+        .card-label {
+            font-size: 0.85rem;
+            color: var(--ember);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(248, 248, 248, 0.7);
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .card-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .feature-chip {
+            background: rgba(248, 248, 248, 0.08);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 500;
+            color: rgba(248, 248, 248, 0.9);
+            border: 1px solid rgba(248, 248, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover .feature-chip {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .view-products-btn {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 158, 205, 0.2) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: var(--pearl);
+            padding: 14px 24px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 20px;
+        }
+
+        .view-products-btn:hover {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--sakura) 100%);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .selection-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--sakura) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        .experience-card.selected .selection-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .product-showcase {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .product-showcase.active {
+            display: flex;
+        }
+
+        .showcase-content {
+            background: linear-gradient(145deg, var(--slate) 0%, var(--charcoal) 100%);
+            border-radius: 40px;
+            max-width: 1200px;
+            width: 100%;
+            border: 1px solid rgba(248, 248, 248, 0.1);
+            animation: slideInUp 0.5s ease-out;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .showcase-header {
+            padding: 50px;
+            border-bottom: 1px solid rgba(248, 248, 248, 0.1);
+            position: sticky;
+            top: 0;
+            background: linear-gradient(145deg, var(--slate) 0%, var(--charcoal) 100%);
+            z-index: 10;
+            backdrop-filter: blur(20px);
+        }
+
+        .close-showcase {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(248, 248, 248, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--pearl);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-showcase:hover {
+            background: var(--ember);
+            transform: rotate(90deg);
+        }
+
+        .showcase-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-subtitle {
+            font-size: 1.2rem;
+            color: rgba(248, 248, 248, 0.6);
+            margin-bottom: 10px;
+        }
+
+        .showcase-description {
+            font-size: 1.1rem;
+            color: rgba(248, 248, 248, 0.8);
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        .products-grid {
+            padding: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-set {
+            background: rgba(248, 248, 248, 0.03);
+            border: 1px solid rgba(248, 248, 248, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .product-set:hover {
+            transform: translateY(-8px);
+            border-color: var(--ember);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 158, 205, 0.15) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-set:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-placeholder {
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pearl);
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: rgba(248, 248, 248, 0.7);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .product-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .product-item-tag {
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: rgba(248, 248, 248, 0.9);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-details-btn {
+            flex: 1;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--sakura) 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .select-set-btn {
+            background: rgba(248, 248, 248, 0.1);
+            color: var(--pearl);
+            border: 1px solid rgba(248, 248, 248, 0.2);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .select-set-btn:hover {
+            background: rgba(248, 248, 248, 0.2);
+            border-color: rgba(248, 248, 248, 0.4);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--ember);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .control-panel {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(30px);
+            padding: 25px 40px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(248, 248, 248, 0.1);
+            z-index: 1000;
+            animation: slideUp 0.8s ease-out 0.5s backwards;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            color: rgba(248, 248, 248, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .counter-value {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--ember) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--sakura) 100%);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+        }
+
+        .start-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pricing-showcase {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.6) 0%, rgba(26, 26, 26, 0.4) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 60px;
+            margin-top: 80px;
+            border: 1px solid rgba(248, 248, 248, 0.1);
+            animation: fadeIn 1s ease-out 0.8s backwards;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pricing-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-amount {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--ember);
+            margin: 20px 0;
+            text-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing-details {
+            font-size: 1.1rem;
+            color: rgba(248, 248, 248, 0.6);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .value-item {
+            background: rgba(248, 248, 248, 0.03);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(248, 248, 248, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .value-item:hover {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: rgba(255, 107, 53, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .value-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--pearl);
+        }
+
+        .value-text {
+            font-size: 0.95rem;
+            color: rgba(248, 248, 248, 0.6);
+            line-height: 1.6;
+        }
+
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, var(--slate) 0%, var(--charcoal) 100%);
+            border-radius: 40px;
+            padding: 60px;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid rgba(248, 248, 248, 0.1);
+            animation: modalPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .modal-emoji {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            animation: bounce 1s ease infinite;
+        }
+
+        .modal-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--ember) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-text {
+            font-size: 1.2rem;
+            color: rgba(248, 248, 248, 0.8);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .modal-selections {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 50px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .experience-card {
+                flex: 0 0 320px;
+            }
+
+            .control-panel {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 30px;
+            }
+
+            .pricing-showcase {
+                padding: 40px 30px;
+            }
+
+            .pricing-amount {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="brand-mark">🇯🇵</div>
+                <div class="brand-text">
+                    <h1>Okaeri Luxembourg</h1>
+                    <p>CURATED JAPANESE EXPERIENCES</p>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </header>
+
+        <div class="hero-section">
+            <h2 class="hero-title">Choose Your<br>Journey</h2>
+            <p class="hero-subtitle">3つの体験を選んで、あなただけの日本ストーリーを始めましょう</p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-container" id="carousel">
+                <div class="experience-card" data-id="kids">
+                    <div class="selection-badge">✓</div>
+                    <div class="card-header">
+                        <div class="card-emoji">🎨</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-label">Creative Learning</div>
+                        <h3 class="card-title">知育・遊び</h3>
+                        <p class="card-description">
+                            想像力を育む知育菓子と、日本製の高品質な玩具・文具。子供たちの創造性を刺激する体験。
+                        </p>
+                        <div class="card-features">
+                            <div class="feature-chip">知育菓子</div>
+                            <div class="feature-chip">折り紙セット</div>
+                            <div class="feature-chip">和柄文具</div>
+                            <div class="feature-chip">木製玩具</div>
+                        </div>
+                        <button class="view-products-btn" onclick="event.stopPropagation(); showProductShowcase('kids')">
+                            商品セットを見る →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="experience-card" data-id="gourmet">
+                    <div class="selection-badge">✓</div>
+                    <div class="card-header">
+                        <div class="card-emoji">🍶</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-label">Epicurean Delights</div>
+                        <h3 class="card-title">晩酌・美食</h3>
+                        <p class="card-description">
+                            職人の技が光るおつまみと、燕三条・有田焼の美しい器。大人のための贅沢な時間。
+                        </p>
+                        <div class="card-features">
+                            <div class="feature-chip">職人おつまみ</div>
+                            <div class="feature-chip">有田焼小皿</div>
+                            <div class="feature-chip">燕三条カトラリー</div>
+                            <div class="feature-chip">プレミアム海苔</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-card" data-id="zen">
+                    <div class="selection-badge">✓</div>
+                    <div class="card-header">
+                        <div class="card-emoji">🍵</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-label">Zen & Harmony</div>
+                        <h3 class="card-title">癒やし・茶道</h3>
+                        <p class="card-description">
+                            プレミアム茶葉と季節の和菓子、美しい茶道具。家族で楽しむ日本の心と癒し。
+                        </p>
+                        <div class="card-features">
+                            <div class="feature-chip">京都抹茶</div>
+                            <div class="feature-chip">季節の和菓子</div>
+                            <div class="feature-chip">茶碗</div>
+                            <div class="feature-chip">茶筅</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-card" data-id="craft">
+                    <div class="selection-badge">✓</div>
+                    <div class="card-header">
+                        <div class="card-emoji">✂️</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-label">Artisan Workshop</div>
+                        <h3 class="card-title">創造・工芸</h3>
+                        <p class="card-description">
+                            日本の伝統工芸DIYキットと上質な文房具。クリエイティブなものづくりの喜び。
+                        </p>
+                        <div class="card-features">
+                            <div class="feature-chip">藍染めキット</div>
+                            <div class="feature-chip">水引細工</div>
+                            <div class="feature-chip">書道セット</div>
+                            <div class="feature-chip">和紙</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-card" data-id="sweets">
+                    <div class="selection-badge">✓</div>
+                    <div class="card-header">
+                        <div class="card-emoji">🍬</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-label">Kawaii Flavors</div>
+                        <h3 class="card-title">J-Sweets</h3>
+                        <p class="card-description">
+                            日本のポップカルチャーと人気菓子、限定デザイングッズ。甘い幸せをお届け。
+                        </p>
+                        <div class="card-features">
+                            <div class="feature-chip">ハイチュウ</div>
+                            <div class="feature-chip">ポッキー限定</div>
+                            <div class="feature-chip">キットカット抹茶</div>
+                            <div class="feature-chip">キャラグッズ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-showcase">
+            <div class="pricing-header">
+                <h3 class="pricing-title">6ヶ月の日本体験</h3>
+                <div class="pricing-amount">€195</div>
+                <p class="pricing-details">€65 × 3回配送 / 2ヶ月ごと</p>
+            </div>
+
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon">🎁</div>
+                    <div class="value-title">40種類から選択</div>
+                    <div class="value-text">全5カテゴリー、40種類の厳選された日本限定商品からお選びいただけます</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🛡️</div>
+                    <div class="value-title">安全性保証</div>
+                    <div class="value-text">EU規制対応、成分完全管理。アレルギー情報も詳細に表示</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🌍</div>
+                    <div class="value-title">ルクセンブルク直送</div>
+                    <div class="value-text">日本から直接、ご自宅のドアまで確実にお届けします</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">✨</div>
+                    <div class="value-title">プレミアム品質</div>
+                    <div class="value-text">入手困難な日本限定の高品質商品のみを厳選してお届け</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="counter">
+            <span class="counter-label">Selected</span>
+            <span class="counter-value"><span id="count">0</span>/3</span>
+        </div>
+        <button class="start-button" id="startBtn" disabled>
+            Start Journey →
+        </button>
+    </div>
+
+    <div class="success-modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-emoji">🎊</div>
+            <h2 class="modal-title">Your Journey Begins!</h2>
+            <p class="modal-text">
+                素晴らしい選択です！選ばれた3つの体験が、<br>
+                これから半年間、2ヶ月ごとにお届けされます。
+            </p>
+            <div class="modal-selections" id="selections"></div>
+            <button class="start-button" onclick="document.getElementById('modal').classList.remove('active')">
+                Continue to Checkout
+            </button>
+        </div>
+    </div>
+
+    <div class="product-showcase" id="productShowcase">
+        <div class="showcase-content">
+            <div class="showcase-header">
+                <button class="close-showcase" onclick="closeProductShowcase()">✕</button>
+                <div class="showcase-title" id="showcaseTitle">知育・遊び</div>
+                <div class="showcase-subtitle" id="showcaseSubtitle">Creative Learning</div>
+                <div class="showcase-description" id="showcaseDescription">
+                    5〜12歳のお子様向け。知育菓子と日本製の高品質な玩具・文具で、遊びながら学ぶ喜びを体験していただけます。
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.experience-card');
+        const countDisplay = document.getElementById('count');
+        const startBtn = document.getElementById('startBtn');
+        const modal = document.getElementById('modal');
+        const selectionsDisplay = document.getElementById('selections');
+
+        let selected = [];
+
+        const categoryNames = {
+            'kids': '知育・遊び',
+            'gourmet': '晩酌・美食',
+            'zen': '癒やし・茶道',
+            'craft': '創造・工芸',
+            'sweets': 'J-Sweets'
+        };
+
+        // Product data for each category
+        const productSets = {
+            kids: [
+                {
+                    name: '科学実験セット',
+                    description: 'クラシエの知育菓子「ねるねるねるね」と「たのしいおすしやさん」、そして日本製の実験キットで科学の楽しさを体験。',
+                    items: ['ねるねるねるね', 'たのしいおすしやさん', '実験キット', '学習ガイド'],
+                    badge: 'ベストセラー',
+                    image: '🧪'
+                },
+                {
+                    name: 'アート＆クラフトセット',
+                    description: '知育菓子「ポッピンクッキン」シリーズと高品質な折り紙、色鉛筆で創造力を開花させます。',
+                    items: ['ポッピンクッキン', '千代紙折り紙100枚', '色鉛筆24色', '折り方ガイド'],
+                    badge: '人気',
+                    image: '🎨'
+                },
+                {
+                    name: '和の文化体験セット',
+                    description: '日本の伝統的な知育菓子と和柄の文房具、木製玩具で日本文化を楽しく学習。',
+                    items: ['和菓子づくりキット', '和柄筆箱', 'けん玉', '漢字カード'],
+                    badge: '新商品',
+                    image: '🏯'
+                },
+                {
+                    name: 'パズル＆ゲームセット',
+                    description: '知育菓子と日本製の木製パズル、知能ゲームで論理的思考を育みます。',
+                    items: ['グミつくろうキット', '木製立体パズル', '知能ゲーム', 'ステッカー'],
+                    badge: '教育的',
+                    image: '🧩'
+                },
+                {
+                    name: 'サイエンスクッキングセット',
+                    description: '料理を科学する知育菓子と、日本の伝統的なお菓子作り体験キット。',
+                    items: ['わたあめ作りキット', 'チョコレート工場', '和菓子型セット', 'レシピブック'],
+                    badge: '体験型',
+                    image: '🍭'
+                },
+                {
+                    name: 'ネイチャー探検セット',
+                    description: '自然をテーマにした知育菓子と、観察キット、日本製の虫眼鏡で探究心を刺激。',
+                    items: ['昆虫グミキット', '虫眼鏡', '観察ノート', '自然ステッカー'],
+                    badge: '冒険',
+                    image: '🔍'
+                }
+            ]
+        };
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.id;
+                
+                if (card.classList.contains('selected')) {
+                    card.classList.remove('selected');
+                    selected = selected.filter(s => s !== id);
+                } else if (selected.length < 3) {
+                    card.classList.add('selected');
+                    selected.push(id);
+                }
+                
+                updateUI();
+            });
+        });
+
+        function updateUI() {
+            countDisplay.textContent = selected.length;
+            startBtn.disabled = selected.length !== 3;
+        }
+
+        startBtn.addEventListener('click', () => {
+            const names = selected.map(id => categoryNames[id]).join('、');
+            selectionsDisplay.innerHTML = `
+                <div style="font-size: 0.9rem; color: rgba(248,248,248,0.6); margin-bottom: 10px;">選択された体験</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--ember);">${names}</div>
+            `;
+            modal.classList.add('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Product showcase functions
+        function showProductShowcase(categoryId) {
+            const showcase = document.getElementById('productShowcase');
+            const productsGrid = document.getElementById('productsGrid');
+            
+            // Update header based on category
+            if (categoryId === 'kids') {
+                document.getElementById('showcaseTitle').textContent = '知育・遊び';
+                document.getElementById('showcaseSubtitle').textContent = 'Creative Learning';
+                document.getElementById('showcaseDescription').textContent = '5〜12歳のお子様向け。知育菓子と日本製の高品質な玩具・文具で、遊びながら学ぶ喜びを体験していただけます。';
+                
+                // Load products
+                const products = productSets.kids;
+                productsGrid.innerHTML = products.map(product => `
+                    <div class="product-set">
+                        <div class="product-image">
+                            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                            <div class="product-placeholder">${product.image}</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-description">${product.description}</div>
+                            <div class="product-items">
+                                ${product.items.map(item => `<span class="product-item-tag">${item}</span>`).join('')}
+                            </div>
+                            <div class="product-actions">
+                                <button class="view-details-btn" onclick="viewProductDetails('${product.name}')">
+                                    詳細を見る
+                                </button>
+                                <button class="select-set-btn" onclick="selectProductSet('${product.name}')">
+                                    選択
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            showcase.classList.add('active');
+        }
+
+        function closeProductShowcase() {
+            document.getElementById('productShowcase').classList.remove('active');
+        }
+
+        function viewProductDetails(productName) {
+            alert(`${productName}の詳細ページへ移動します。\n\n商品の詳細情報、成分表、アレルギー情報、配送スケジュールなどをご確認いただけます。`);
+            // Here you would navigate to the product detail page
+            // window.location.href = `/products/${encodeURIComponent(productName)}`;
+        }
+
+        function selectProductSet(productName) {
+            alert(`${productName}を選択しました！\n\nこのセットがあなたのジャーニーの一部になります。`);
+            closeProductShowcase();
+        }
+
+        // Close showcase on outside click
+        document.getElementById('productShowcase').addEventListener('click', (e) => {
+            if (e.target.id === 'productShowcase') {
+                closeProductShowcase();
+            }
+        });
+    </script>
+</body>
+</html>

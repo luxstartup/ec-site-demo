@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okaeri Luxembourg - あなたの日本ジャーニーを選ぼう</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500;700&family=Playfair+Display:wght@400;600;800&family=Cormorant+Garamond:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent-gold: #d4af37;
+            --accent-red: #c9302c;
+            --accent-teal: #2a7f7f;
+            --cream: #faf8f3;
+            --soft-gray: #e8e4db;
+            --text-dark: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #f5f1e8 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+
+        .tagline {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            color: var(--accent-red);
+            font-weight: 300;
+            margin-top: 25px;
+            letter-spacing: 3px;
+        }
+
+        .journey-selector {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            color: #999;
+            transition: all 0.4s ease;
+        }
+
+        .step.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        .step.active .step-number {
+            background: var(--accent-gold);
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .step.completed .step-number {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+            border-radius: 20px;
+            padding: 35px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .category-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .category-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .category-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .category-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .category-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-card.selected {
+            border-color: var(--accent-gold);
+            background: linear-gradient(145deg, #fffef9 0%, #faf8f0 100%);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .category-card.selected::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .category-card.selected .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .category-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .category-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .category-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .item-tag {
+            background: var(--soft-gray);
+            color: var(--text-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .item-tag {
+            background: var(--accent-gold);
+            color: white;
+        }
+
+        .selection-counter {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 20px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideInRight 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .selection-counter:hover {
+            transform: scale(1.05);
+        }
+
+        .selection-counter .count {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 8px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-red) 0%, #a82824 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(201, 48, 44, 0.3);
+            letter-spacing: 1px;
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 48, 44, 0.4);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .pricing-info {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .pricing-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin: 20px 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .price-detail {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--accent-teal);
+        }
+
+        .benefit-text {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .journey-selector {
+                padding: 30px 20px;
+            }
+
+            .selection-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .selection-counter {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+
+            .selection-counter .count {
+                font-size: 1.5rem;
+            }
+
+            .price {
+                font-size: 2.5rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 50px;
+            border-radius: 24px;
+            max-width: 600px;
+            text-align: center;
+            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .modal p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grain-overlay"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">Okaeri Luxembourg</div>
+            <div class="tagline">２ヶ月に一度、日本から届く家族の物語</div>
+        </header>
+
+        <div class="journey-selector">
+            <div class="step-indicator">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <span>3つの体験を選ぶ</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <span>配送スケジュール</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>ジャーニー開始</span>
+                </div>
+            </div>
+
+            <h2
+                style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); text-align: center; margin-bottom: 15px;">
+                あなたの日本ジャーニーを選びましょう
+            </h2>
+            <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 30px;">
+                全5カテゴリー・40種類のセットから、お好きな3つを選んでください
+            </p>
+
+            <div class="selection-grid">
+                <div class="category-card" data-category="kids">
+                    <span class="category-icon">🎨</span>
+                    <div class="category-name">知育・遊び</div>
+                    <div class="category-subtitle">Creative Learning</div>
+                    <div class="category-description">
+                        5〜12歳のお子様向け。知育菓子と日本製の高品質な玩具・文具で、遊びながら学ぶ喜びを。
+                    </div>
+                    <div class="category-items">
+                        <span class="item-tag">知育菓子</span>
+                        <span class="item-tag">折り紙セット</span>
+                        <span class="item-tag">和柄文具</span>
+                        <span class="item-tag">木製玩具</span>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="gourmet">
+                    <span class="category-icon">🍶</span>
+                    <div class="category-name">晩酌・美食</div>
+                    <div class="category-subtitle">Epicurean Delights</div>
+                    <div class="category-description">
+                        大人のための贅沢。職人が手がけるおつまみと、燕三条や有田焼の美しい器で至福の時間を。
+                    </div>
+                    <div class="category-items">
+                        <span class="item-tag">職人おつまみ</span>
+                        <span class="item-tag">有田焼小皿</span>
+                        <span class="item-tag">燕三条カトラリー</span>
+                        <span class="item-tag">プレミアム海苔</span>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="zen">
+                    <span class="category-icon">🍵</span>
+                    <div class="category-name">癒やし・茶道</div>
+                    <div class="category-subtitle">Zen & Harmony</div>
+                    <div class="category-description">
+                        家族で楽しむ日本の心。プレミアム茶葉、季節の和菓子、そして美しい茶道具で癒しのひとときを。
+                    </div>
+                    <div class="category-items">
+                        <span class="item-tag">京都抹茶</span>
+                        <span class="item-tag">季節の和菓子</span>
+                        <span class="item-tag">茶碗</span>
+                        <span class="item-tag">茶筅</span>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="craft">
+                    <span class="category-icon">✂️</span>
+                    <div class="category-name">創造・工芸</div>
+                    <div class="category-subtitle">Artisan Workshop</div>
+                    <div class="category-description">
+                        クリエイティブな方へ。日本の伝統工芸DIYキットと上質な文房具で、ものづくりの楽しさを体験。
+                    </div>
+                    <div class="category-items">
+                        <span class="item-tag">藍染めキット</span>
+                        <span class="item-tag">水引細工</span>
+                        <span class="item-tag">書道セット</span>
+                        <span class="item-tag">和紙</span>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="sweets">
+                    <span class="category-icon">🍬</span>
+                    <div class="category-name">J-Sweets</div>
+                    <div class="category-subtitle">Kawaii Flavors</div>
+                    <div class="category-description">
+                        日本のポップカルチャー満載。ハイチュウなど人気菓子と限定デザイングッズで、甘い幸せを。
+                    </div>
+                    <div class="category-items">
+                        <span class="item-tag">ハイチュウ</span>
+                        <span class="item-tag">ポッキー限定</span>
+                        <span class="item-tag">キットカット抹茶</span>
+                        <span class="item-tag">キャラグッズ</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="cta-button" id="confirmBtn" disabled>
+                    ジャーニーを始める →
+                </button>
+            </div>
+        </div>
+
+        <div class="pricing-info">
+            <h3>半年間の日本体験プラン</h3>
+            <div class="price">€195</div>
+            <div class="price-detail">€65 × 3回配送（2ヶ月に1回）</div>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">✨</div>
+                    <div class="benefit-text">厳選された日本限定商品</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🛡️</div>
+                    <div class="benefit-text">EU規制対応・成分管理</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🚚</div>
+                    <div class="benefit-text">ルクセンブルクまで直送</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🎁</div>
+                    <div class="benefit-text">40種類から自由選択</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="selection-counter">
+        選択中: <span class="count" id="selectionCount">0</span> / 3
+    </div>
+
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-icon">🎉</div>
+            <h2>素晴らしい選択です！</h2>
+            <p id="selectedCategories"></p>
+            <p style="margin-top: 20px;">
+                半年間、2ヶ月に1回、選ばれた3つの体験が<br>
+                ルクセンブルクのご自宅に届きます。
+            </p>
+            <button class="cta-button" onclick="document.getElementById('confirmModal').classList.remove('active')">
+                詳細を確認する
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const categories = document.querySelectorAll('.category-card');
+        const countDisplay = document.getElementById('selectionCount');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const modal = document.getElementById('confirmModal');
+        const selectedCategoriesDisplay = document.getElementById('selectedCategories');
+
+        let selectedCount = 0;
+        let selectedCategories = [];
+
+        const categoryNames = {
+            'kids': '知育・遊び',
+            'gourmet': '晩酌・美食',
+            'zen': '癒やし・茶道',
+            'craft': '創造・工芸',
+            'sweets': 'J-Sweets'
+        };
+
+        categories.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category;
+
+                if (card.classList.contains('selected')) {
+                    card.classList.remove('selected');
+                    selectedCount--;
+                    selectedCategories = selectedCategories.filter(c => c !== category);
+                } else {
+                    if (selectedCount < 3) {
+                        card.classList.add('selected');
+                        selectedCount++;
+                        selectedCategories.push(category);
+                    }
+                }
+
+                countDisplay.textContent = selectedCount;
+                confirmBtn.disabled = selectedCount !== 3;
+
+                // Update step indicator
+                const step1 = document.querySelector('.step');
+                if (selectedCount === 3) {
+                    step1.classList.add('completed');
+                } else {
+                    step1.classList.remove('completed');
+                }
+            });
+        });
+
+        confirmBtn.addEventListener('click', () => {
+            const categoriesText = selectedCategories
+                .map(cat => categoryNames[cat])
+                .join('、');
+
+            selectedCategoriesDisplay.innerHTML = `選択された体験：<br><strong style="color: var(--accent-gold); font-size: 1.3rem;">${categoriesText}</strong>`;
+            modal.classList.add('active');
+        });
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+
+</html>
