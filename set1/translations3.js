@@ -4,7 +4,7 @@ const translations = {
         hero_desc: "【欧州限定】究極のヴィーガンラーメン体験。<br>アルコール不使用・動物性原材料不使用の「クリーン」な美味しさと、<br>美濃焼の職人技が織りなす、特別なひととき。",
         price_label: "PREMIUM SET PRICE",
         price_tax: "(税込)",
-        price_disclaimer: "※関税・VATなどの輸入諸税は、受取時に配送業者より別途請求される場合があります。",
+        price_disclaimer: "※関税・VATなどの輸入諸税は当店が負担いたします。受取時の追加請求はございません。",
         cta_button: "世界に誇る日本品質を味わう →",
 
         // Main Ingredient
@@ -130,7 +130,7 @@ const translations = {
         hero_desc: "A curated Japanese experience featuring three types of alcohol-free vegan instant ramen, Japanese soy meat, and authentic Mino ware pottery.",
         price_label: "SET PRICE",
         price_tax: "(Tax incl.)",
-        price_disclaimer: "*Import duties, taxes, and fees are not included and may be collected by the carrier upon delivery.",
+        price_disclaimer: "*Import duties and taxes are covered by us. No additional charges upon delivery.",
         cta_button: "Add to Cart →",
 
         main_ing_label: "Main Ingredient",
@@ -210,7 +210,7 @@ const translations = {
         hero_desc: "Une expérience japonaise sélectionnée comprenant trois types de ramen instantanés vegan sans alcool, de la viande de soja japonaise, et de la poterie authentique de Mino.",
         price_label: "PRIX DU SET",
         price_tax: "(TTC)",
-        price_disclaimer: "*Les droits de douane, taxes et frais à l'importation ne sont pas inclus et peuvent être perçus par le transporteur à la livraison.",
+        price_disclaimer: "*Les droits de douane et taxes sont pris en charge par nous. Aucun frais supplémentaire à la livraison.",
         cta_button: "Ajouter au Panier →",
 
         main_ing_label: "Ingrédient Principal",
@@ -290,7 +290,7 @@ const translations = {
         hero_desc: "Ein kuratiertes japanisches Erlebnis mit drei Arten von alkoholfreien veganen Instant-Ramen, japanischem Sojafleisch und authentischer Mino-Keramik.",
         price_label: "SET PREIS",
         price_tax: "(Inkl. MwSt.)",
-        price_disclaimer: "*Einfuhrzölle, Steuern und Gebühren sind nicht enthalten und können bei Lieferung vom Spediteur erhoben werden.",
+        price_disclaimer: "*Einfuhrzölle und Steuern werden von uns übernommen. Keine zusätzlichen Gebühren bei Lieferung.",
         cta_button: "In den Warenkorb →",
 
         main_ing_label: "Hauptzutat",
